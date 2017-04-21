@@ -1,0 +1,19 @@
+#!/bin/bash
+
+STR="{'data':[%s]}"
+ITEM="{'{#NAME}':'%s', '{#ID}':'%d'}"
+
+i=0
+cards=()
+
+itemStr=""
+nvidia-smi -q | grep 'Product Name' | cut -c 39- | (while read line
+do
+  itemStr="$itemStr,{'{#NAME}':'$line', '{#ID}':'$i'}"
+  i=$(( $i+1 ))
+done
+
+itemStr=$(echo $itemStr|cut -c 2-)
+itemStr="{'data':$itemStr }"
+echo $itemStr)
+
